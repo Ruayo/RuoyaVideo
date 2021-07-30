@@ -1,0 +1,5 @@
+server:
+  port: 8982
+spring:
+  application:
+    name: API-COMMONS

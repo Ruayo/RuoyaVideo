@@ -1,0 +1,5 @@
+server:
+  port: 8985
+spring:
+  application:
+    name: API-VIDEO
