@@ -1,4 +1,4 @@
-package com.bailu;
+package com.bailiu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,14 +6,15 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author ：wangyunpeng@zhangwen.com
- * @date ：Created in 2021/7/30 15:32
- * @description：启动类
+ * @date ：Created in 2021/8/20 14:23
+ * @description：
  * @version:
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AdminAdminsApplication {
+public class AdminGatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AdminAdminsApplication.class,args);
+        SpringApplication.run(AdminGatewayApplication.class,args);
     }
 }
+

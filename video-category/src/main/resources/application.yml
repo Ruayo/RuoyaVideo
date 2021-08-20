@@ -3,3 +3,6 @@ server:
 spring:
   application:
     name: API-CATEGORY
+  cloud:
+    nacos:
+      server-addr:  http://182.92.69.171:8848

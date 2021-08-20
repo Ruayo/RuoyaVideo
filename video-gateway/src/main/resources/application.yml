@@ -3,3 +3,15 @@ server:
 spring:
   application:
     name: API-GATEWAY
+  cloud:
+    nacos:
+      server-addr:  http://182.92.69.171:8848
+    gateway:
+      routes:
+        - id: admins_router
+          uri: http://localhost:8980
+          predicates:
+            - Path= /admin/**
+
+
+

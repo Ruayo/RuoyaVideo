@@ -1,0 +1,8 @@
+server:
+  port: 8980
+spring:
+  application:
+    name: API-ADMINS
+  cloud:
+    nacos:
+      server-addr:  http://182.92.69.171:8848

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bailu</groupId>
-    <artifactId>Video-admin</artifactId>
+    <artifactId>Video-api</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -16,7 +16,12 @@
         <module>video-users</module>
         <module>video-videos</module>
     </modules>
-
+    <!--继承springboot父项目-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+    </parent>
     <!--属性 自定义n多个属性-->
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -25,7 +30,7 @@
         <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
         <spring.cloud.alibaba.version>2.2.1.RELEASE</spring.cloud.alibaba.version>
         <mysql.connector.java.version>5.1.38</mysql.connector.java.version>
-        <druid.version>1.1.14</druid.version>
+        <druid.vcerion>1.2.1</druid.vcerion>
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <javacpp.version>1.4.1</javacpp.version>
         <javacv.version>1.4.1</javacv.version>
@@ -34,23 +39,17 @@
         <aliyun.java.sdk.core.version>4.5.3</aliyun.java.sdk.core.version>
         <commons.lang.version>2.6</commons.lang.version>
         <fastjson.version>1.2.74</fastjson.version>
-        <spring.data.redis.version>2.3.0.RELEASE</spring.data.redis.version>
         <aliyun.sdk.oss.version>3.10.2</aliyun.sdk.oss.version>
+        <mybatis.spring.boot.starter.version>2.1.3</mybatis.spring.boot.starter.version>
+        <spring.data.redis.version>2.2.5.RELEASE</spring.data.redis.version>
+        <spring.boot.stater.data.elasticsearch>2.2.5.RELEASE</spring.boot.stater.data.elasticsearch>
+        <spring.boot.stater.amqp>2.2.5.RELEASE</spring.boot.stater.amqp>
+        <lombok.version>1.18.4</lombok.version>
     </properties>
 
     <!--维护springcloud版本  springcloud 阿里巴巴-->
     <dependencyManagement>
         <dependencies>
-
-            <!-- SpringBoot的依赖配置-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.1.1.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <!--引入springcloud alibaba-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -68,9 +67,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.boot.starter.version}</version>
+            </dependency>
 
-            <!--mysql mybatis druid-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
@@ -81,7 +89,85 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>${druid.version}</version>
+                <version>${druid.vcerion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons.fileupload.version}</version>
+            </dependency>
+
+            <!--截取视频第一帧-->
+            <dependency>
+                <groupId>org.bytedeco</groupId>
+                <artifactId>javacpp</artifactId>
+                <version>${javacpp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bytedeco</groupId>
+                <artifactId>javacv</artifactId>
+                <version>${javacv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bytedeco.javacpp-presets</groupId>
+                <artifactId>opencv-platform</artifactId>
+                <version>${opencv.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bytedeco.javacpp-presets</groupId>
+                <artifactId>ffmpeg-platform</artifactId>
+                <version>${ffmpeg.platform.version}</version>
+            </dependency>
+
+            <!--整合redis-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+            </dependency>
+
+
+            <!--云通信-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun.java.sdk.core.version}</version>
+            </dependency>
+
+            <!--oss-->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun.sdk.oss.version}</version>
+            </dependency>
+
+            <!--commons-lange-->
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+
+            <!--fastjson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!--es-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${spring.boot.stater.data.elasticsearch}</version>
+            </dependency>
+
+            <!--mq-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${spring.boot.stater.amqp}</version>
             </dependency>
 
         </dependencies>
