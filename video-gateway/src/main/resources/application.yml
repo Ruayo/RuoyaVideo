@@ -7,11 +7,32 @@ spring:
     nacos:
       server-addr:  http://182.92.69.171:8848
     gateway:
+      #admin router
       routes:
         - id: admins_router
-          uri: http://localhost:8980
+          uri: lb://API-ADMINS
           predicates:
-            - Path= /admin/**
-
-
-
+            - Path= /admins/admin/api
+          filters:
+            - StripPrefix=1  # 1是去掉一级 2去掉2级
+      #category router
+        - id: category
+          uri: lb://API-CATEGORY
+          predicates:
+            - Path= /category/category/api
+          filters:
+            - StripPrefix=1   # 1是去掉一级 2去掉2级
+      #user router
+        - id: admins_router
+          uri: lb://API-USERS
+          predicates:
+            - Path= /users/api
+          filters:
+            - StripPrefix=1   # 1是去掉一级 2去掉2级
+      #video router
+        - id: admins_router
+          uri: lb://API-VIDEO
+          predicates:
+            - Path= /video/api
+          filters:
+            - StripPrefix=1   # 1是去掉一级 2去掉2级

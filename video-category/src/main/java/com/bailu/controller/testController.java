@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/cate")
+@RequestMapping("/category")
 public class testController {
     @GetMapping("/api")
     public String test(){
