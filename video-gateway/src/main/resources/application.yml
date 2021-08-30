@@ -19,7 +19,7 @@ spring:
         - id: category_router
           uri: lb://API-CATEGORY
           predicates:
-            - Path= /category/category/api
+            - Path= /category/category/**
           filters:
             - StripPrefix=1   # 1是去掉一级 2去掉2级
       #user router

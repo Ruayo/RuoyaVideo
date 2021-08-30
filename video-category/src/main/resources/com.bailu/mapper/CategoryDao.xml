@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bailu.dao.CategoryDao">
+
+    <resultMap type="com.bailu.entity.CategoryEntity" id="CategoryMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap type="com.bailu.entity.CategoryEntity" id="CategoriesMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <!--封装孩子-->
+        <collection property="children" javaType="list" ofType="com.bailu.entity.CategoryEntity">
+            <id property="id" column="cid" jdbcType="INTEGER"/>
+            <result property="name" column="cname" jdbcType="VARCHAR"/>
+            <result property="parentId" column="cparentId"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryByFirstLevel" resultMap="CategoriesMap">
+        select
+                c.id,
+                c.name,
+                c1.id     as  cid,
+                c1.name   as   cname,
+                c1.parent_id  as  cparentId
+        from yingxue.category c
+        left join yingxue.category c1
+        on c.id = c1.parent_id
+        where c.parent_id is null
+    </select>
+
+</mapper>
+

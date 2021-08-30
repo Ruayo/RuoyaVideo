@@ -1,5 +1,6 @@
 package com.bailu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL) // 用在类上  用来指定json数据中包含哪些数据 JsonInclude.Include.NON_NULL 只要json中不为空的属性
+@TableName("category")
 public class CategoryEntity implements Serializable {
     private Integer id;
     /**
