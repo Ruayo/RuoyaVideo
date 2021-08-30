@@ -6,3 +6,20 @@ spring:
   cloud:
     nacos:
       server-addr:  http://182.92.69.171:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://182.92.69.171:3306/yingxue?characterEncoding=UTF-8&useSSL=false
+    username: root
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      column-underline: true
+      field-strategy: NOT_NULL
+      id-type: AUTO
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+  typeAliasesPackage: com.bailu.entity.*.entity

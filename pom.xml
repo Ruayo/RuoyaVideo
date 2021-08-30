@@ -40,11 +40,12 @@
         <commons.lang.version>2.6</commons.lang.version>
         <fastjson.version>1.2.74</fastjson.version>
         <aliyun.sdk.oss.version>3.10.2</aliyun.sdk.oss.version>
-        <mybatis.spring.boot.starter.version>2.1.3</mybatis.spring.boot.starter.version>
+        <mybatisplus.version>3.0.7.1</mybatisplus.version>
         <spring.data.redis.version>2.2.5.RELEASE</spring.data.redis.version>
         <spring.boot.stater.data.elasticsearch>2.2.5.RELEASE</spring.boot.stater.data.elasticsearch>
         <spring.boot.stater.amqp>2.2.5.RELEASE</spring.boot.stater.amqp>
         <lombok.version>1.18.4</lombok.version>
+        <gson.version>2.8.5</gson.version>
     </properties>
 
     <!--维护springcloud版本  springcloud 阿里巴巴-->
@@ -74,9 +75,20 @@
             </dependency>
 
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.spring.boot.starter.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.baomidou</groupId>
+                        <artifactId>mybatis-plus-generator</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatisplus.version}</version>
             </dependency>
 
             <dependency>
@@ -84,7 +96,11 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.connector.java.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
