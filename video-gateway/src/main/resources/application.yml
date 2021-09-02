@@ -12,27 +12,34 @@ spring:
         - id: admins_router
           uri: lb://API-ADMINS
           predicates:
-            - Path= /admins/admin/api
+            - Path= /admin/tokens,/admin/admin-user,/admin/tokens/**,/admin/login
           filters:
             - StripPrefix=1  # 1是去掉一级 2去掉2级
       #category router
         - id: category_router
           uri: lb://API-CATEGORY
           predicates:
-            - Path= /category/category/**
+            - Path= /admin/category/**
           filters:
             - StripPrefix=1   # 1是去掉一级 2去掉2级
       #user router
         - id: users_router
           uri: lb://API-USERS
           predicates:
-            - Path= /users/users/api
+            - Path= /admin/users/**
           filters:
             - StripPrefix=1   # 1是去掉一级 2去掉2级
       #video router
         - id: video_router
           uri: lb://API-VIDEO
           predicates:
-            - Path= /video/video/api
+            - Path= /admin/video/**
           filters:
             - StripPrefix=1   # 1是去掉一级 2去掉2级
+
+      globalcors: # 跨域配置处理
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"

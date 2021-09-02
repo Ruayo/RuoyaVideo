@@ -4,6 +4,7 @@ import com.bailu.config.RedisKeys;
 import com.bailu.dto.AdminDTO;
 import com.bailu.entity.AdminEntity;
 import com.bailu.service.AdminService;
+import com.bailu.utils.JSONUtils;
 import com.bailu.utils.R;
 import com.bailu.utils.RedisUtils;
 import com.google.gson.Gson;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ：wangyunpeng@zhangwen.com
@@ -27,7 +29,6 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("admins")
 public class adminController {
     @Resource
     private AdminService adminService;
@@ -64,6 +65,23 @@ public class adminController {
     public void logout(@PathVariable("token") String token) {
 
         redisUtils.delete(RedisKeys.TOKEN_KEY + token);
+    }
+
+
+    //登录接口
+    @PostMapping("/tokens")
+    public Map<String, Object> tokens(@RequestBody AdminEntity admin, HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+        //1.new ObjectMapper fastjson JSONObject.tojsonString(admin)  jackson  new ObjectMapper().writerValueAsString(对象)
+        log.info("接收到admin对象为: {}", JSONUtils.writeJSON(admin));
+        //2.进行登录
+        AdminEntity adminDB = adminService.login(admin);
+        //3.登录成功
+        String token = session.getId();
+        // redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisUtils.set(RedisKeys.TOKEN_KEY + token,admin);
+        result.put("token",token);
+        return result;
     }
 
 }
