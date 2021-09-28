@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -29,7 +29,7 @@ public class CategoryController {
     }
 
     //添加类别接口
-    @PostMapping ("/save") //{name:"xxx","parent_id":1}
+    @PostMapping
     public CategoryEntity save(@RequestBody CategoryEntity categoryEntity) {
         log.info("添加类别信息: {}", JSONUtils.writeJSON(categoryEntity));
         categoryEntity = categoryService.insert(categoryEntity);
@@ -48,7 +48,7 @@ public class CategoryController {
     }
 
     //类别列表
-    @GetMapping("/getAll")
+    @GetMapping
     public List<CategoryEntity> categories() {
         return categoryService.queryByFirstLevel();
     }
